@@ -39,9 +39,48 @@ vim.keymap.set(
     "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
 )
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
+vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/anthony/packer.lua<CR>");
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
+vim.keymap.set("n", "<leader><loader>", function()
+   vim.cmd("so")
 end)
+vim.keymap.set("n", "<leader>pv", function()
+    vim.cmd(":w")
+    vim.cmd.Ex()
+end)
+vim.keymap.set("n", "<leader><Enter>", function()
+    local file_ext = vim.fn.expand('%:e')
+    local filepath = vim.fn.expand('%:p')
+    local filedir = vim.fn.expand('%:p:h')
+    local filename = vim.fn.expand('%:t')
+    
+    
+    -- Open terminal in the current file's directory
+    vim.cmd(':w')
+    vim.cmd('split')
+    vim.cmd('wincmd j')
+    vim.cmd('terminal')
+    os.execute("sleep " .. tonumber(0.2))
+    
+    -- Switch to terminal insert mode
+    vim.cmd('startinsert')
+    vim.api.nvim_chan_send(vim.b.terminal_job_id, "cd " .. filedir .. "\n")
+    -- Send the gcc command
+    if file_ext == 'c' then
+        vim.api.nvim_chan_send(vim.b.terminal_job_id, "gcc " .. filepath .. "\n./a.out ")
+    end
+    if file_ext == 'cpp' then
+        vim.api.nvim_chan_send(vim.b.terminal_job_id, "g++ " .. filepath .. "\n./a.out ")
+    end
+    if file_ext == 'java' then
+        vim.api.nvim_chan_send(vim.b.terminal_job_id, "java " .. filepath .. " ")
+    end
+    if file_ext == 'py' then
+        vim.api.nvim_chan_send(vim.b.terminal_job_id, "python " .. filepath .. " ")
+    end
+    if file_ext == 'sh' then
+        vim.api.nvim_chan_send(vim.b.terminal_job_id, "./" .. filename .. " ")
+    end
+end, { silent = false, noremap = true, desc = "Compile current file" })
+
