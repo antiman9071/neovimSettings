@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 vim.opt.nu = true
 vim.opt.relativenumber =true 
 
@@ -24,8 +26,7 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("i", "<C-z>", "<C-o>u")
-vim.g.mapleader = " "
+
