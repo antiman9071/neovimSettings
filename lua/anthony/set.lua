@@ -28,5 +28,3 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "100"
 
-vim.keymap.set("i", "<C-z>", "<C-o>u")
-

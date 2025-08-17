@@ -41,12 +41,19 @@ vim.keymap.set(
 
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/anthony/packer.lua<CR>");
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
+vim.keymap.set("i", "<C-z>", "<C-o>u")
 
 vim.keymap.set("n", "<leader><loader>", function()
    vim.cmd("so")
 end)
 vim.keymap.set("n", "<leader>pv", function()
-    vim.cmd(":w")
+    local success, resultOrError = pcall(function()
+        vim.cmd(":w")
+        return
+    end)
+    if not success then
+        print("file not saved")
+    end
     vim.cmd.Ex()
 end)
 vim.keymap.set("n", "<leader><Enter>", function()
