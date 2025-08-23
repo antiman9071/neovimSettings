@@ -1,3 +1,4 @@
+vim.diagnostic.enable()
 vim.g.mapleader = " "
 
 vim.opt.nu = true
@@ -28,5 +29,4 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "100"
 
-vim.keymap.set("i", "<C-z>", "<C-o>u")
-
+vim.g.netrw_liststyle = 3     -- Tree-style view

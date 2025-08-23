@@ -1,4 +1,4 @@
 require("anthony.set")
 require("anthony.remap")
-print("hello")
+require("anthony.packer")
 
