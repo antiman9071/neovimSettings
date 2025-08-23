@@ -56,6 +56,13 @@ local cmp_select = {behavior = cmp.SelectBehavior.Select}
 -- from rafamadriz/friendly-snippets
 require('luasnip.loaders.from_vscode').lazy_load()
 
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+})
+
 cmp.setup({
   sources = {
     {name = 'path'},
